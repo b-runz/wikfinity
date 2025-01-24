@@ -1,5 +1,8 @@
+import { v4 as uuidv4 } from 'uuid';
+
 export const dynamic = 'force-dynamic'
 export default function Home() {
+  const guid = uuidv4();
   const env =  process.env;
   return (    
   <div>
@@ -11,6 +14,7 @@ export default function Home() {
         </li>
       ))}
     </ul>
+    <p>Generated GUID: {guid}</p>
   </div>
   );
 }

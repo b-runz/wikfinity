@@ -1,5 +1,6 @@
 export default function Home() {
+  const env =  process.env;
   return (
-    <h1>Test</h1>
+    <h1>{env.DATABASE_CONNECTION_STRING}</h1>
   );
 }

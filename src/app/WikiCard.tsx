@@ -10,18 +10,33 @@ interface WikiCardProps {
 export default async function WikiCard({ title }: WikiCardProps) {
   const response = await fetch(`https://en.wikipedia.org/w/api.php?action=query&format=json&titles=${title}&prop=extracts|pageimages|info&inprop=url&exintro=1&exsentences=5&explaintext=1&piprop=thumbnail&pithumbsize=400&origin=*`);
   const data = await response.json();
-      const newArticles = Object.values(data.query.pages)
-        .map((page: any): WikiArticle  => ({
+      interface WikiResponse {
+        query: {
+          pages: {
+            [key: string]: {
+              title: string;
+              extract: string;
+              pageid: number;
+              thumbnail: {
+                source: string;
+                width: number;
+                height: number;
+            };
+              canonicalurl: string;
+            };
+          };
+        };
+      }
+
+      const newArticles = Object.values((data as WikiResponse).query.pages)
+        .map((page): WikiArticle => ({
           title: page.title,
           extract: page.extract,
           pageid: page.pageid,
           thumbnail: page.thumbnail,
           url: page.canonicalurl,
         }))
-        .filter((article) => article.thumbnail
-                             && article.thumbnail.source
-                             && article.url
-                             && article.extract);
+        .filter((article) => article.thumbnail && article.thumbnail.source && article.url && article.extract);
   const article: WikiArticle = newArticles[0];
   return(
     <div className="h-screen w-full flex items-center justify-center snap-start relative">

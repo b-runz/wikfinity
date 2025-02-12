@@ -1,0 +1,20 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "SWA Debug", 
+            "type": "node", 
+            "request": "launch", 
+            "program": "swa",
+            "args": [
+                "start", 
+                "http://localhost:3000",
+                "--run", 
+                "npm run dev", 
+                "--data-api-location", 
+                "swa-db-connections" 
+            ], 
+            "console": "integratedTerminal" 
+        }
+    ]
+}

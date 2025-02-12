@@ -1,6 +1,12 @@
-export const dynamic = 'force-dynamic'
+import WikiCard from './WikiCard';
+
 export default function Home() {
-  return (    
-    <h1>Test</h1>
+  return (
+    <div className="h-screen w-full bg-black text-white overflow-y-scroll snap-y snap-mandatory hide-scroll">
+      <WikiCard title='Ether'></WikiCard>
+      <WikiCard title='Oxygen'></WikiCard>
+      <WikiCard title='Fire'></WikiCard>
+    </div>
+
   );
 }
